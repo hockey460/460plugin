@@ -202,5 +202,65 @@ function include_template_function( $template_path ) {
     return $template_path;
 }
 
+/* This incorporates and activtates the shortcode. This piece of code is taken from the simgle-player_reviews.php file as that file serves as the template for the plugin. In order to create a shortcode which follows the same format, the peice of code is incorperaed within this shortcode function. The following fucntion explains that, when a shortcode is found, it is replaced by a piece of code (in our case it is our template file). This function will retrieve these posts acting as a callback function. */
+
+function player_reviews_function() {
+
+
+    $mypost = array( 'post_type' => 'player_reviews','orderby' => 'rand', 'posts_per_page' => '3',);
+    $loop = new WP_Query( $mypost );
+     while ( $loop->have_posts() ) : $loop->the_post(); ?> 
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <header class="entry-header">
+ 
+                <!-- Display featured image -->
+                <div class="fimage">
+                    <?php the_post_thumbnail( 'thumbnail' );   // Thumbnail (default 150px x 150px max)
+                    ?>
+                </div>
+ 
+                <!-- Display and Player Name -->
+               <div class="pname">
+                <strong>Player: </strong><?php the_title(); ?><br />
+                <strong>Position: </strong>
+                <?php echo esc_html( get_post_meta( get_the_ID(), 'player_position', true ) ); ?>
+                <br />
+                
+ 
+                <!-- Display red stars based on player rating -->
+                <strong>Rating: </strong>
+                <?php
+                $nb_stars = intval( get_post_meta( get_the_ID(), 'player_rating', true ) );
+                for ( $star_counter = 1; $star_counter <= 5; $star_counter++ ) {
+                    if ( $star_counter <= $nb_stars ) {
+                        echo '<img src="' . plugins_url( 'Player-Reviews/images/redstar.png' ) . '" />';
+                    } else {
+                        echo '<img src="' . plugins_url( 'Player-Reviews/images/greystaricon.png' ). '" />';
+                    }
+                }
+                ?>
+                </div>
+            </header>
+ 
+            <!-- Display player review contents -->
+           <div class="rcontents">
+            <div class="entry-content"><?php the_content(); ?></div>
+            </div>
+        </article>
+ 
+    <?php endwhile; 
+
+}
+
+// Ιf a shortcode of [player-reviews] is found in a post’s content, then the player_reviews_function() is called automatically.
+
+
+function register_shortcodes(){
+   add_shortcode('player-reviews', 'player_reviews_function');
+}
+
+add_action( 'init', 'register_shortcodes');
+?>
+
 
 
