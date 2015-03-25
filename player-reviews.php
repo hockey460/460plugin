@@ -82,3 +82,37 @@ add_action( 'wp_enqueue_style', 'player_reviews' );
 
 */
 
+
+/* Attemp 2 Options page */
+
+
+add_action('admin_menu', 'register_my_custom_submenu_page');
+
+function register_my_custom_submenu_page() { 
+	add_submenu_page( '/edit.php?post_type=player_reviews', 'Options Page', 'Options Page', 'manage_options', 'options-page', 'my_custom_submenu_page_callback' ); } 
+
+function my_custom_submenu_page_callback() { echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>'; echo '<h2>Options Page</h2>'; echo 
+'</div>'; }
+
+//Atempt #3
+/*
+add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function
+);
+
+function cd_add_submenu(){
+add_submenu_page( 'options-general.php','Submenu', 'Submenu', 'manage_options', 'awesome-sub-menu', 'cd_display_submenu_options');
+}
+add_action( 'admin_menu', 'cd_add_submenu' );
+
+
+add_action('admin_menu', 'pr_custom_menu_page');
+
+function pr_custom_menu_page() { 
+add_menu_page('PR Custom Submenu Page', 'PR Custom Submenu Page', 'manage_options', 'pr-custom-submenu-page', 'pr_custom_submenu_page_init');
+}
+
+function pr_custom_submenu_page_init(){
+		echo "<h1> Player Reviews </h1>";
+		}
+*/
+
