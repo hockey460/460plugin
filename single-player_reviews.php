@@ -19,3 +19,16 @@ get_header(); ?>
     <?php while ( $loop->have_posts() ) : $loop->the_post();?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
             <header class="entry-header">
+ 
+                <!-- This code displays the featured image. Thumbnail image is set to medium resolution -->
+                <div class="fimage">
+                    <?php the_post_thumbnail( 'thumbnail' );  // Thumbnail (default 150px x 150px max) 
+                    ?>
+                </div>
+ 
+                <!-- This code displays Player Name -->
+               <div class="pname">
+                <strong>Player: </strong><?php the_title(); ?><br />
+                <strong>Position: </strong>
+                <?php echo esc_html( get_post_meta( get_the_ID(), 'player_position', true ) ); ?>
+                <br />
