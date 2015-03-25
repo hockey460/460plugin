@@ -182,6 +182,25 @@ function add_player_review_fields( $player_review_id, $player_review ) {
 }
 
 
+add_filter( 'template_include', 'include_template_function', 1 );
+
+/* Here the code searches for a template single-player_reviews.php in the current theme directory. If nothing is identified then it resorts to the plugin directory for the template, which serves this part of the plugin. The template_include hook was used to change the default post type to the custom post type template. */
+
+
+function include_template_function( $template_path ) {
+    if ( get_post_type() == 'player_reviews' ) {
+        if ( is_single() ) {
+            // checks if the file exists in the theme first,
+            // otherwise serve the file from the plugin
+            if ( $theme_file = locate_template( array ( 'single-player_reviews.php' ) ) ) {
+                $template_path = $theme_file;
+            } else {
+                $template_path = plugin_dir_path( __FILE__ ) . '/single-player_reviews.php';
+            }
+        }
+    }
+    return $template_path;
+}
 
 
 
