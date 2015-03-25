@@ -24,6 +24,14 @@ font-size: .9em;
 
 }
 
+.rcontents
+{
+float: left;
+margin-top: 5px;
+border-bottom: solid hsl(0, 96%, 21%);
+text-indent: 2.5em;
+}
+
 
 
     
