@@ -47,3 +47,18 @@ get_header(); ?>
                 ?>
                 </div>
             </header>
+			
+			
+			<!-- This piece of code displays the player review contents -->
+           <div class="rcontents">
+            <div class="entry-content"><?php the_content(); ?></div>
+            </div>
+        </article>
+ 
+// Endwhile will close the loop created above
+
+    <?php endwhile; ?>
+    </div>
+</div>
+<?php wp_reset_query(); ?>
+<?php get_footer(); ?>
