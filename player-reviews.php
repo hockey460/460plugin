@@ -116,3 +116,49 @@ function pr_custom_submenu_page_init(){
 		}
 */
 
+
+
+/* This function registers a meta box and associates it with the custom post type. This following block of code adds a metabox section/additional info to our player reviews plugin page through the dashboard on WordPress. The two tabs that can be edited are the players position, and the corresponding rating identified through the drop down menu. */
+
+function my_admin() {
+    add_meta_box( 'player_review_meta_box',
+        'Player Review Details',
+        'display_player_review_meta_box',
+        'player_reviews', 'normal', 'high'
+    );
+}
+
+
+
+/* This Fucntion retrieves the post ID and uses that to query the database to get the associated Player's name and Rating which in turn returns the fields on the screen.  The meta_post_meta returns an empty string which results in displaying empty fields in the meta box.*/
+
+
+function display_player_review_meta_box( $player_review ) {
+    // Retrieve current name of the Position and Player Rating based on review ID
+    $player_position = esc_html( get_post_meta( $player_review->ID, 'player_position', true ) );
+    $player_rating = intval( get_post_meta( $player_review->ID, 'player_rating', true ) );
+    ?>
+    <table>
+        <tr>
+            <td>Player Position</td>
+            <td><input type="text" name="player_review_position_name" value="<?php echo $player_position; ?>" /></td>
+        </tr>
+        <tr>
+            <td>Player Rating</td>
+            <td>
+                <select name="player_review_rating">
+                <?php
+                // Generate all items of drop-down list
+                for ( $rating = 5; $rating >= 1; $rating -- ) {
+                ?>
+                    <option value="<?php echo $rating; ?>" <?php echo selected( $rating, $player_rating ); ?>>
+                    <?php echo $rating; ?> stars <?php } ?>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+
+
+
