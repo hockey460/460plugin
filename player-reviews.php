@@ -161,4 +161,27 @@ function display_player_review_meta_box( $player_review ) {
 }
 
 
+add_action( 'save_post', 'add_player_review_fields', 10, 2 );
+
+
+/* This function is executed when posts are saved or deleted from the admin panel from the WordPress Dashboard. After checking for the type of received post data, if it is a Custom Post Type then it checks again to see if the meta box elements have been assigned values and then finally stores the values in those fields */
+
+
+
+function add_player_review_fields( $player_review_id, $player_review ) {
+    // Check post type for player reviews
+    if ( $player_review->post_type == 'player_reviews' ) {
+        // Store data in post meta table if present in post data
+        if ( isset( $_POST['player_review_position_name'] ) && $_POST['player_review_position_name'] != '' ) {
+            update_post_meta( $player_review_id, 'player_position', $_POST['player_review_position_name'] );
+        }
+        if ( isset( $_POST['player_review_rating'] ) && $_POST['player_review_rating'] != '' ) {
+            update_post_meta( $player_review_id, 'player_rating', $_POST['player_review_rating'] );
+        }
+    }
+}
+
+
+
+
 
