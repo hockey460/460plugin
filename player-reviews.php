@@ -53,3 +53,32 @@ function create_player_review() {
     );
 }
 
+add_action( 'admin_init', 'my_admin' );
+
+
+/*
+ * Enqueue styles is meant to link stylesheets to the php files.
+*/
+
+
+// Attempt #2 
+function player_reviews_stylesheet() {
+	wp_enqueue_style( 'player-reviews' , plugins_url( '/style.css' , __FILE__ ) );
+	}
+	
+add_action( 'wp_enqueue_scripts' , 'player_reviews_stylesheet' );
+
+
+/*
+function player_reviews() {
+	wp_enqueue_style( 'hockey-style', get_stylesheet_uri() );
+	
+	//adding stylesheet for the body on player reviews plugin //
+	
+	wp_enqueue_style( '', plugins_url() . '/plugins/Player-Reviews/style.css');
+	
+	}
+add_action( 'wp_enqueue_style', 'player_reviews' );
+
+*/
+
