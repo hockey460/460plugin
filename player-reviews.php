@@ -53,6 +53,8 @@ function create_player_review() {
     );
 }
 
+
+
 add_action( 'admin_init', 'my_admin' );
 
 
@@ -81,6 +83,8 @@ function player_reviews() {
 add_action( 'wp_enqueue_style', 'player_reviews' );
 
 */
+
+
 
 
 /* Attemp 2 Options page */
@@ -182,6 +186,8 @@ function add_player_review_fields( $player_review_id, $player_review ) {
 }
 
 
+
+
 add_filter( 'template_include', 'include_template_function', 1 );
 
 /* Here the code searches for a template single-player_reviews.php in the current theme directory. If nothing is identified then it resorts to the plugin directory for the template, which serves this part of the plugin. The template_include hook was used to change the default post type to the custom post type template. */
@@ -253,14 +259,5 @@ function player_reviews_function() {
 }
 
 // Ιf a shortcode of [player-reviews] is found in a post’s content, then the player_reviews_function() is called automatically.
-
-
-function register_shortcodes(){
-   add_shortcode('player-reviews', 'player_reviews_function');
-}
-
-add_action( 'init', 'register_shortcodes');
-?>
-
 
 
