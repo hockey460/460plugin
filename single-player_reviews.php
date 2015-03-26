@@ -24,41 +24,4 @@ get_header(); ?>
                 <div class="fimage">
                     <?php the_post_thumbnail( 'thumbnail' );  // Thumbnail (default 150px x 150px max) 
                     ?>
-                </div>
- 
-                <!-- This code displays Player Name -->
-               <div class="pname">
-                <strong>Player: </strong><?php the_title(); ?><br />
-                <strong>Position: </strong>
-                <?php echo esc_html( get_post_meta( get_the_ID(), 'player_position', true ) ); ?>
-                <br />
-				
-				  <!-- This code displays the red stars based on player rating. Pictures are taken from the images folder -->
-                <strong>Rating: </strong>
-                <?php
-                $nb_stars = intval( get_post_meta( get_the_ID(), 'player_rating', true ) );
-                for ( $star_counter = 1; $star_counter <= 5; $star_counter++ ) {
-                    if ( $star_counter <= $nb_stars ) {
-                        echo '<img src="' . plugins_url( 'Player-Reviews/images/redstar.png' ) . '" />';
-                    } else {
-                        echo '<img src="' . plugins_url( 'Player-Reviews/images/greystaricon.png' ). '" />';
-                    }
-                }
-                ?>
-                </div>
-            </header>
-			
-			
-			<!-- This piece of code displays the player review contents -->
-           <div class="rcontents">
-            <div class="entry-content"><?php the_content(); ?></div>
-            </div>
-        </article>
- 
-// Endwhile will close the loop created above
-
-    <?php endwhile; ?>
-    </div>
-</div>
-<?php wp_reset_query(); ?>
-<?php get_footer(); ?>
+               
